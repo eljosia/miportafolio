@@ -19,6 +19,9 @@
   }
 }
 
+html {
+  scroll-behavior: smooth !important;
+}
 body {
   margin: 0;
   font-family: system-ui;

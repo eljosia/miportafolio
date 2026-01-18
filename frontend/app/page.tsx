@@ -17,10 +17,20 @@ export default function Page() {
         'Desarrollador Full Stack con experiencia en Laravel, Node.js y NestJS.',
     },
     skills: [
-      { name: 'Laravel', level: 90 },
-      { name: 'NestJS', level: 80 },
-      { name: 'Node.js', level: 85 },
-    ],
+      {
+        category: "Backend",
+        skills: ["Laravel", "NestJS", "Node.js", "MySQL", "PostgreSQL"]
+      },
+      {
+        category: "Frontend",
+        skills: ["Next.js", "React", "Tailwind", "HTML", "CSS"]
+      },
+      {
+        category: "DevOps",
+        skills: ["Linux", "Docker", "Nginx", "Git"]
+      }
+    ]
+    ,
     education: [
       {
         title: 'Ingeniería en Sistemas',
@@ -32,6 +42,8 @@ export default function Page() {
       {
         title: 'POS Restaurante',
         image: '/demo.jpg',
+        gitHubUrl: 'https://github.com/user/repo',
+        demoUrl: 'https://demo.com',
       },
       {
         title: 'POS Restaurante',
@@ -40,6 +52,8 @@ export default function Page() {
       {
         title: 'POS Restaurante',
         image: '/demo.jpg',
+        gitHubUrl: 'https://github.com/user/repo',
+        demoUrl: 'https://demo.com',
       },
       {
         title: 'POS Restaurante',
@@ -49,6 +63,8 @@ export default function Page() {
     contact: {
       email: 'correo@mail.com',
       whatsapp: '123456789',
+      gitHubUrl: 'https://github.com/user/repo',
+      demoUrl: 'https://demo.com',
     },
   }
 

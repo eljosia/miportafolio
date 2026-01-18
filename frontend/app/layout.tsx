@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <Navbar />
-        <main className="flex flex-col @md:flex-row">
+        <main className="flex flex-col @md:flex-row scroll-smooth">
           {children}
         </main>
         <Footer />
