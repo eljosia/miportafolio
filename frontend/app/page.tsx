@@ -6,76 +6,57 @@ import Education from '@/components/sections/Education'
 import Projects from '@/components/sections/Projects'
 import Contact from '@/components/sections/Contact'
 
-export default function Page() {
-  const data = {
-    home: {
-      title: 'José Ángel',
-      subtitle: 'Full Stack Developer',
-    },
-    about: {
-      description:
-        'Desarrollador Full Stack con experiencia en Laravel, Node.js y NestJS.',
-    },
-    skills: [
-      {
-        category: "Backend",
-        skills: ["Laravel", "NestJS", "Node.js", "MySQL", "PostgreSQL"]
-      },
-      {
-        category: "Frontend",
-        skills: ["Next.js", "React", "Tailwind", "HTML", "CSS"]
-      },
-      {
-        category: "DevOps",
-        skills: ["Linux", "Docker", "Nginx", "Git"]
-      }
-    ]
-    ,
-    education: [
-      {
-        title: 'Ingeniería en Sistemas',
-        place: 'Universidad X',
-        year: '2018 - 2022',
-      },
-    ],
-    projects: [
-      {
-        title: 'POS Restaurante',
-        image: '/demo.jpg',
-        gitHubUrl: 'https://github.com/user/repo',
-        demoUrl: 'https://demo.com',
-      },
-      {
-        title: 'POS Restaurante',
-        image: '/demo.jpg',
-      },
-      {
-        title: 'POS Restaurante',
-        image: '/demo.jpg',
-        gitHubUrl: 'https://github.com/user/repo',
-        demoUrl: 'https://demo.com',
-      },
-      {
-        title: 'POS Restaurante',
-        image: '/demo.jpg',
-      },
-    ],
-    contact: {
-      email: 'correo@mail.com',
-      whatsapp: '123456789',
-      gitHubUrl: 'https://github.com/user/repo',
-      demoUrl: 'https://demo.com',
-    },
+export default async function Page() {
+  async function getHome() {
+    const res = await fetch('http://localhost:3000/api/home', {
+      cache: 'no-store', // sin cache
+    })
+    return res.json()
+  }
+
+  async function getAbout() {
+    const res = await fetch('http://localhost:3000/api/about', {
+      cache: 'no-store', // sin cache
+    })
+    return res.json()
+  }
+
+  async function getSkills() {
+    const res = await fetch('http://localhost:3000/api/skills', {
+      cache: 'no-store', // sin cache
+    })
+    return res.json()
+  }
+
+  async function getEducation() {
+    const res = await fetch('http://localhost:3000/api/education', {
+      cache: 'no-store', // sin cache
+    })
+    return res.json()
+  }
+
+  async function getProjects() {
+    const res = await fetch('http://localhost:3000/api/projects', {
+      cache: 'no-store', // sin cache
+    })
+    return res.json()
+  }
+
+  async function getContact() {
+    const res = await fetch('http://localhost:3000/api/contact', {
+      cache: 'no-store', // sin cache
+    })
+    return res.json()
   }
 
   return (
     <>
-      <Home data={data.home} />
-      <About data={data.about} />
-      <Skills data={data.skills} />
-      <Education data={data.education} />
-      <Projects data={data.projects} />
-      <Contact data={data.contact} />
+      <Home data={await getHome()} />
+      <About data={await getAbout()} />
+      <Skills data={await getSkills()} />
+      <Education data={await getEducation()} />
+      <Projects data={await getProjects()} />
+      <Contact data={await getContact()} />
     </>
   )
 }

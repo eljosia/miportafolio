@@ -1,28 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProjectsModule } from './projects/projects.module';
 import { ConfigModule } from '@nestjs/config';
-import { GalleryModule } from './gallery/gallery.module';
+import { HomeModule } from './modules/home/home.module';
+import { AboutModule } from './modules/about/about.module';
+import { SkillsModule } from './modules/skills/skills.module';
+import { EducationModule } from './modules/education/education.module';
+import { ProjectsModule } from './modules/projects/projects.module';
+import { ContactModule } from './modules/contact/contact.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: true, // Note: set to false in productions
-    }),
+    HomeModule,
+    AboutModule,
+    SkillsModule,
+    EducationModule,
     ProjectsModule,
-    GalleryModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],
