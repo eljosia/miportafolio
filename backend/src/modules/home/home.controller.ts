@@ -1,12 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { HomeService } from './home.service';
 import { CreateHomeDto } from './dto/create-home.dto';
 import { UpdateHomeDto } from './dto/update-home.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/home')
 export class HomeController {
   constructor(private readonly homeService: HomeService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createHomeDto: CreateHomeDto) {
     return this.homeService.create(createHomeDto);
