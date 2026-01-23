@@ -8,6 +8,8 @@ import { SkillsModule } from './modules/skills/skills.module';
 import { EducationModule } from './modules/education/education.module';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { ContactModule } from './modules/contact/contact.module';
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { env } from 'process';
 
 @Module({
   imports: [
@@ -20,6 +22,17 @@ import { ContactModule } from './modules/contact/contact.module';
     EducationModule,
     ProjectsModule,
     ContactModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: env.DATABASE_HOST,
+      port: env.DATABASE_PORT ? parseInt(env.DATABASE_PORT) : 3306,
+      username: env.DATABASE_USER,
+      password: env.DATABASE_PASSWORD,
+      database: env.DATABASE_NAME,
+      autoLoadEntities: true,
+      synchronize: env.DATABASE_SYNC === 'true' ? true : false, // never use TRUE in production
+      logging: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

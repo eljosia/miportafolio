@@ -1,1 +1,6 @@
-export class CreateSkillDto {}
+export class CreateSkillDto {
+  name: string
+  level?: number
+  icon?: string
+  categoryId: number
+}

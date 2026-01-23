@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateHomeDto } from './dto/create-home.dto';
 import { UpdateHomeDto } from './dto/update-home.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Home } from './entities/home.entity';
+import { Repository } from 'typeorm'
 
 const data = {
   profile_image: '/profile.jpg',
@@ -10,12 +13,18 @@ const data = {
 
 @Injectable()
 export class HomeService {
+
+  constructor(@InjectRepository(Home)
+  private readonly homeRepo: Repository<Home>) {}
+
   create(createHomeDto: CreateHomeDto) {
-    return 'This action adds a new home';
+    // Agregar nuevo registro
+    const newHome = this.homeRepo.create(createHomeDto);
+    return this.homeRepo.save(newHome);
   }
 
   getData() {
-    return data;
+    return this.homeRepo.find();
   }
 
   update(id: number, updateHomeDto: UpdateHomeDto) {

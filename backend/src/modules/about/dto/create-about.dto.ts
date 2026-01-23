@@ -1,1 +1,3 @@
-export class CreateAboutDto {}
+export class CreateAboutDto {
+    readonly description: string;
+}

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SkillsService } from './skills.service';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
+import { CreateSkillCategoryDto } from './dto/create-skill-category.dto';
 
 @Controller('/api/skills')
 export class SkillsController {
@@ -12,10 +13,21 @@ export class SkillsController {
     return this.skillsService.create(createSkillDto);
   }
 
+  @Post('/category')
+  createCategory(@Body() createSkillCategoryDto: CreateSkillCategoryDto) {
+    return this.skillsService.createCategory(createSkillCategoryDto);
+  }
+
   @Get()
   findAll() {
     return this.skillsService.getData();
   }
+
+  @Get('/category')
+  findCategory() {
+    return this.skillsService.getCategoryData();
+  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {

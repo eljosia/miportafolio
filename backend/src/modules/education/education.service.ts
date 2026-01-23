@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEducationDto } from './dto/create-education.dto';
 import { UpdateEducationDto } from './dto/update-education.dto';
+import { Education } from './entities/education.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm'
 
 const data = [
   {
@@ -13,20 +16,37 @@ const data = [
 
 @Injectable()
 export class EducationService {
+
+  constructor(@InjectRepository(Education)
+  private readonly educationRepo: Repository<Education>
+  ) { }
+
+
   create(createEducationDto: CreateEducationDto) {
-    return 'This action adds a new education';
+    // Agregar nuevo registro
+    const newEducation = this.educationRepo.create(createEducationDto);
+    return JSON.stringify({ message: 'Education created successfully', data: this.educationRepo.save(newEducation) });
   }
 
   getData() {
-    return data;
+    return this.educationRepo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} education`;
+    const education = this.educationRepo.findOne({ where: { id } });
+    if (!education) {
+      return JSON.stringify({ message: 'Education not found' });
+    }
+    return JSON.stringify({ message: 'Education found', data: education });
   }
 
   update(id: number, updateEducationDto: UpdateEducationDto) {
-    return `This action updates a #${id} education`;
+    const education = this.educationRepo.findOne({ where: { id } });
+    if (!education) {
+      return JSON.stringify({ message: 'Education not found' });
+    }
+    this.educationRepo.update(id, updateEducationDto);
+    return JSON.stringify({ message: 'Education updated successfully', data: this.findOne(id) });
   }
 
   remove(id: number) {
