@@ -10,6 +10,9 @@ import { ProjectsModule } from './modules/projects/projects.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { env } from 'process';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersController } from './modules/users/users.controller';
 
 @Module({
   imports: [
@@ -33,8 +36,10 @@ import { env } from 'process';
       synchronize: env.DATABASE_SYNC === 'true' ? true : false, // never use TRUE in production
       logging: true,
     }),
+    UsersModule,
+    AuthModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UsersController],
   providers: [AppService],
 })
 export class AppModule {}
